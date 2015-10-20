@@ -119,8 +119,8 @@ case "$1" in
 
   mysql:info)
     DB_IMAGE=mysql/$APP
-    ID=$(docker ps | grep "$DB_IMAGE":latest |  awk '{print $1}')
-    IP=$(docker inspect $ID | grep IPAddress | awk '{ print $2 }' | tr -d ',"')
+    ID=$(docker ps | grep "$DB_IMAGE" |  awk '{print $1}')
+    IP=$(docker inspect $ID | grep \"IPAddress\" | awk '{ print $2 }' | tr -d ',"')
     echo "$ID"
     # PORT=$(docker port $ID 5432)
     echo
