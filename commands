@@ -64,7 +64,7 @@ case "$1" in
 
     if [[ ! -f "$DOKKU_ROOT/.mysql/volume_$APP" ]]; then
         VOLUME_PATH=$(docker inspect $ID | grep /var/lib/docker/vfs/dir/ | awk '{print $2}' | sed -e's/"//g')
-        IP=$(docker inspect $ID | grep IPAddress | awk '{ print $2 }' | tr -d ',"')
+        IP=$(docker inspect $ID | grep \"IPAddress\" | awk '{ print $2 }' | tr -d ',"')
         docker run $DB_IMAGE mysqladmin -h $IP -u admin -p'mysql-server' password $DB_PASS
         docker run $DB_IMAGE mysqladmin -h $IP -u admin -p$DB_PASS create 'db'
         # docker run mysql/create mysql -h $IP -u admin -p'newpass' -e "RENAME USER admin@'%' TO $DB_USER@'%';"
